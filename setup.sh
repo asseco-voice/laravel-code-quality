@@ -8,3 +8,5 @@ BASEDIR=$(dirname "$0")
 
 echo "Installing git hooks from '${BASEDIR}/.githooks/*' to '${CALLER_DIR}/.git/hooks/'"
 cp -R $BASEDIR/.githooks/* $CALLER_DIR/.git/hooks
+
+echo "test"
