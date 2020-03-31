@@ -2,5 +2,9 @@
 # Code quality setup script, enforcing same code quality rules for all team members
 # Running as composer post-install script
 
-# Install git hooks locally
-cp .githooks/* ./../.git/hooks/*
+# Directory from which the script is called (to know in which folder to install code quality tools)
+CALLER_DIR=$PWD
+BASEDIR=$(dirname "$0")
+
+echo "Installing git hooks from '${BASEDIR}/.githooks/*' to '${CALLER_DIR}/.git/hooks/'"
+cp -R $BASEDIR/.githooks/* $CALLER_DIR/.git/hooks
