@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# TODO: uključi i JS i CSS...navodno code sniffer i njih rješava
 STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep ".php\{0,1\}$")
 PASS=true
 

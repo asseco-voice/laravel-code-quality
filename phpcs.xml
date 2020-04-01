@@ -22,31 +22,53 @@
     <arg value="sp"/>
 
     <rule ref="Generic">
+        <exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
         <exclude name="Generic.Commenting"/>
+        <exclude name="Generic.Classes.OpeningBraceSameLine"/>
+        <exclude name="Generic.Files.LowercasedFilename"/>
+        <exclude name="Generic.Files.EndFileNoNewline"/>
+        <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSame"/>
+        <exclude name="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
+        <exclude name="Generic.Functions.OpeningFunctionBraceBsdAllman.BraceOnSameLine"/>
+        <exclude name="Generic.NamingConventions.CamelCapsFunctionName"/>
         <exclude name="Generic.PHP.ClosingPHPTag"/>
         <exclude name="Generic.PHP.RequireStrictTypes"/>
-        <exclude name="Generic.Files.LowercasedFilename"/>
-        <exclude name="Generic.Classes.OpeningBraceSameLine"/>
-        <exclude name="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
+        <exclude name="Generic.PHP.UpperCaseConstant.Found"/>
         <exclude name="Generic.WhiteSpace.DisallowSpaceIndent"/>
-        <exclude name="Generic.Files.EndFileNoNewline"/>
-        <exclude name="Generic.NamingConventions.CamelCapsFunctionName"/>
+    </rule>
+
+    <rule ref="Generic.Formatting.SpaceAfterNot">
+        <properties>
+            <property name="spacing" value="0" />
+        </properties>
     </rule>
 
     <rule ref="PSR2"/>
-    <rule ref="PSR12"/>
+
+    <rule ref="PSR12">
+        <exclude name="PSR12.Traits.UseDeclaration.MultipleImport"/>
+        <exclude name="PSR12.Traits.UseDeclaration.UseAfterBrace"/>
+        <exclude name="PSR12.ControlStructures.ControlStructureSpacing"/>
+    </rule>
 
     <rule ref="Squiz">
+        <exclude name="Squiz.Arrays.ArrayDeclaration.MultiLineNotAllowed"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.SingleLineNotAllowed"/>
+        <exclude name="Squiz.Commenting"/>
         <exclude name="Squiz.Files.FileExtension.ClassFound"/>
-        <exclude name="Squiz.Commenting.FileComment.Missing"/>
-        <exclude name="Squiz.Commenting.ClassComment.Missing"/>
-        <exclude name="Squiz.Commenting.FunctionComment.Missing"/>
-        <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"/>
-        <exclude name="Squiz.Operators.ComparisonOperatorUsage.NotAllowed"/>
-        <exclude name="Squiz.Commenting.ClosingDeclarationComment.Missing"/>
-        <exclude name="Squiz.WhiteSpace.FunctionSpacing.AfterLast"/>
         <exclude name="Squiz.NamingConventions.ValidFunctionName.ScopeNotCamelCaps"/>
+        <exclude name="Squiz.Operators.ComparisonOperatorUsage.NotAllowed"/>
+        <exclude name="Squiz.Operators.ComparisonOperatorUsage.ImplicitTrue"/>
+        <exclude name="Squiz.Strings.ConcatenationSpacing.PaddingFound"/>
+        <exclude name="Squiz.WhiteSpace.FunctionSpacing"/>
         <exclude name="Squiz.WhiteSpace.FunctionClosingBraceSpace"/>
+        <exclude name="Squiz.WhiteSpace.MemberVarSpacing"/>
+        <exclude name="Squiz.WhiteSpace.ObjectOperatorSpacing"/>
+        <exclude name="Squiz.WhiteSpace.ControlStructureSpacing.SpacingBeforeClose"/>
+        <!-- Apparently these are also inside the Squiz ruleset-->
+        <exclude name="PEAR.ControlStructures.MultiLineCondition"/>
+        <exclude name="PEAR.Files.IncludingFile.UseInclude"/>
+        <exclude name="PEAR.Functions.FunctionCallSignature"/>
     </rule>
 
 </ruleset>
