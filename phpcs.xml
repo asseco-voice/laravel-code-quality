@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="PHP_CodeSniffer"
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Evil code sniffer"
          xsi:noNamespaceSchemaLocation="./vendor/squizlabs/php_codesniffer/phpcs.xsd">
-    <description>Live3.0 coding standard.</description>
+    <description>Evil code sniffer ruleset</description>
 
     <exclude-pattern>*/.idea/*</exclude-pattern>
     <exclude-pattern>*/.git/*</exclude-pattern>
@@ -14,26 +14,39 @@
     <exclude-pattern>storage/</exclude-pattern>
     <exclude-pattern>public/</exclude-pattern>
 
-    <!-- A path to strip from the front of file paths inside reports -->
-    <arg name="basepath" value="."/>
     <!-- Report: "full", "xml", "checkstyle", "csv", "code", "info",
                 "json", "junit", "emacs", "source", "summary", "diff"
                 "svnblame", "gitblame", "hgblame" or "notifysend" -->
-    <arg name="report" value="summary"/>
-    <arg value="sp"/>
+    <arg name="report" value="full"/>
     <arg name="colors"/>
+    <arg value="sp"/>
+
+    <rule ref="Generic">
+        <exclude name="Generic.Commenting"/>
+        <exclude name="Generic.PHP.ClosingPHPTag"/>
+        <exclude name="Generic.PHP.RequireStrictTypes"/>
+        <exclude name="Generic.Files.LowercasedFilename"/>
+        <exclude name="Generic.Classes.OpeningBraceSameLine"/>
+        <exclude name="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
+        <exclude name="Generic.WhiteSpace.DisallowSpaceIndent"/>
+        <exclude name="Generic.Files.EndFileNoNewline"/>
+        <exclude name="Generic.NamingConventions.CamelCapsFunctionName"/>
+    </rule>
 
     <rule ref="PSR2"/>
+    <rule ref="PSR12"/>
 
-    <!-- Ban some functions (value will be shown as suggestion) -->
-    <rule ref="Generic.PHP.ForbiddenFunctions">
-        <properties>
-            <property name="forbiddenFunctions" type="array">
-                <element key="sizeof" value="count"/>
-                <element key="delete" value="unset"/>
-                <element key="print" value="echo"/>
-            </property>
-        </properties>
+    <rule ref="Squiz">
+        <exclude name="Squiz.Files.FileExtension.ClassFound"/>
+        <exclude name="Squiz.Commenting.FileComment.Missing"/>
+        <exclude name="Squiz.Commenting.ClassComment.Missing"/>
+        <exclude name="Squiz.Commenting.FunctionComment.Missing"/>
+        <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"/>
+        <exclude name="Squiz.Operators.ComparisonOperatorUsage.NotAllowed"/>
+        <exclude name="Squiz.Commenting.ClosingDeclarationComment.Missing"/>
+        <exclude name="Squiz.WhiteSpace.FunctionSpacing.AfterLast"/>
+        <exclude name="Squiz.NamingConventions.ValidFunctionName.ScopeNotCamelCaps"/>
+        <exclude name="Squiz.WhiteSpace.FunctionClosingBraceSpace"/>
     </rule>
 
 </ruleset>
