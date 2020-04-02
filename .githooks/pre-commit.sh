@@ -4,8 +4,15 @@ STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep ".php\{0,1
 PASS=true
 
 CODE_QUALITY_PATH=./../code-quality
+
+PHP_CODE_SNIFFER_PATH=./vendor/bin/phpcs
+PHP_CODE_SNIFFER_BEAUTIFIER_PATH=./vendor/bin/phpcbf
 PHP_CODE_SNIFFER_RULESET=${CODE_QUALITY_PATH}/phpcs.xml
+
+PHP_CS_FIXER_PATH=./vendor/bin/phpcs_fixer
 PHP_CS_FIXER_RULESET=${CODE_QUALITY_PATH}/phpcsfixer.xml
+
+PHP_MESS_DETECTOR_PATH=./vendor/bin/phpmd
 PHP_MESS_DETECTOR_RULESET=${CODE_QUALITY_PATH}/phpmd.xml
 
 # Colors
@@ -74,7 +81,7 @@ echo -e "========================="
 echo -e "PHP code sniffer check..."
 echo -e "=========================\n"
 # Check if phpcs is installed
-which ./vendor/bin/phpcs &> /dev/null
+which $PHP_CODE_SNIFFER_PATH &> /dev/null
 if [[ "$?" == 1 ]]; then
   echo -e "${WhiteOnRed}PHPCS not installed, please install it to proceed.${NoColor}\n"
   exit 1
@@ -83,9 +90,9 @@ fi
 for FILE in $STAGED_FILES
 do
   # Fix what is fixable first (phpcbf) then run phpcs
-  ./vendor/bin/phpcbf --standard=$PHP_CODE_SNIFFER_RULESET -q "$FILE" > /dev/null
+  $PHP_CODE_SNIFFER_BEAUTIFIER_PATH --standard=$PHP_CODE_SNIFFER_RULESET -q "$FILE" > /dev/null
   # Hide warnings; Show relative path in reports; Use our standard
-  ./vendor/bin/phpcs --warning-severity=0 --basepath=. --standard=$PHP_CODE_SNIFFER_RULESET "$FILE"
+  $PHP_CODE_SNIFFER_PATH --warning-severity=0 --basepath=. --standard=$PHP_CODE_SNIFFER_RULESET "$FILE"
 
   if [[ "$?" != 0 ]]; then
     echo -e "${WhiteOnRed}Failed:${NoColor} ${WhiteOnBlue}$FILE${NoColor}\n"
@@ -96,10 +103,41 @@ done
 if ! $PASS; then
   echo -e "${WhiteOnRed}COMMIT FAILED because of PHP code sniffer fails.${NoColor}"
   echo -e "To see per-file error, please run this command within the project root:"
-  echo -e "\t${WhiteOnBlue}./vendor/bin/phpcs --standard=../code-quality/phpcs.xml -v path/to/file${NoColor}\n"
+  echo -e "\t${WhiteOnBlue}$PHP_CODE_SNIFFER_PATH --standard=$PHP_CODE_SNIFFER_RULESET -v path/to/file${NoColor}\n"
   exit 1
 fi
 echo -e "${BlackOnGreen}Done.${NoColor}\n"
+
+
+
+echo -e "=========================="
+echo -e "PHP mess detector check..."
+echo -e "==========================\n"
+# Check if phpcs is installed
+which $PHP_MESS_DETECTOR_PATH &> /dev/null
+if [[ "$?" == 1 ]]; then
+  echo -e "${WhiteOnRed}PHPMD not installed, please install it to proceed.${NoColor}\n"
+  exit 1
+fi
+
+for FILE in $STAGED_FILES
+do
+  ${PHP_MESS_DETECTOR_PATH} $FILE ansi $PHP_MESS_DETECTOR_RULESET
+
+  if [[ "$?" != 0 ]]; then
+    echo -e "${WhiteOnRed}Failed:${NoColor} ${WhiteOnBlue}$FILE${NoColor}\n"
+    PASS=false
+  fi
+done
+
+if ! $PASS; then
+  echo -e "${WhiteOnRed}COMMIT FAILED because of PHP mess detector fails.${NoColor}"
+  echo -e "To see per-file error, please run this command within the project root:"
+  echo -e "\t${WhiteOnBlue}$PHP_MESS_DETECTOR_PATH path/to/file ansi $PHP_MESS_DETECTOR_RULESET${NoColor}\n"
+  exit 1
+fi
+echo -e "${BlackOnGreen}Done.${NoColor}\n"
+
 
 
 
