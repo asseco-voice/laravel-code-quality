@@ -35,41 +35,74 @@ WhiteOnBlue="\033[0;37m\033[44m"
 
 NoColor='\033[0m'
 
-# No sense in scanning complete codebase. Scanning only changed PHP files
+# No sense in scanning a complete codebase. Scanning only changed PHP files.
 if [[ "$STAGED_FILES" = "" ]]; then
   echo -e "No staged PHP files. Skipping pre-commit hook...\n"
   exit 0
 fi
 
-# Check if phpcs is installed
-which ./vendor/bin/phpcs &> /dev/null
-if [[ "$?" == 1 ]]; then
-  echo -e "${WhiteOnRed}Please install PHPCS${NoColor}\n"
-  exit 1
-fi
 
-echo -e "\n--- PHP CodeSniffer ---\n"
 
+echo -e "================================="
+echo -e "Checking for PHP syntax errors..."
+echo -e "=================================\n"
+# Doesn't check for undefined variables/functions
+SYNTAX_FAILED=()
 for FILE in $STAGED_FILES
 do
-  ./vendor/bin/phpcbf --standard=$PHP_CODE_SNIFFER_RULESET -q "$FILE" > /dev/null
-  ./vendor/bin/phpcs --basepath=. --standard=$PHP_CODE_SNIFFER_RULESET -v "$FILE"
-
-  if [[ "$?" == 0 ]]; then
-    echo -e "${BlackOnGreen}Passed: $FILE${NoColor}\n"
-  else
-    echo -e "${WhiteOnRed}Failed: $FILE${NoColor}\n"
+  php -lf $FILE > /dev/null
+  if [[ "$?" != 0 ]]; then
+    SYNTAX_FAILED+="\t$FILE\n"
     PASS=false
   fi
 done
 
 if ! $PASS; then
-  echo -e "${WhiteOnRed}COMMIT FAILED"
-  echo -e "Run: ${WhiteOnBlue}./vendor/bin/phpcs . ../code-quality/phpcs.xml${WhiteOnRed} from root to see CodeSniffer errors.${NoColor}\n"
+  echo -e "${WhiteOnRed}COMMIT FAILED because of syntax errors in the following files:${NoColor}"
+  for FILE in $SYNTAX_FAILED
+  do
+    echo -e "$FILE"
+  done
+  echo -e "Exiting..."
   exit 1
-else
-  git add .
-  echo -e "${BlackOnGreen}COMMIT SUCCEEDED${NoColor}\n"
+fi
+echo -e "${BlackOnGreen}Done.${NoColor}\n"
+
+
+
+echo -e "========================="
+echo -e "PHP code sniffer check..."
+echo -e "=========================\n"
+# Check if phpcs is installed
+which ./vendor/bin/phpcs &> /dev/null
+if [[ "$?" == 1 ]]; then
+  echo -e "${WhiteOnRed}PHPCS not installed, please install it to proceed.${NoColor}\n"
+  exit 1
 fi
 
+for FILE in $STAGED_FILES
+do
+  # Fix what is fixable first (phpcbf) then run phpcs
+  ./vendor/bin/phpcbf --standard=$PHP_CODE_SNIFFER_RULESET -q "$FILE" > /dev/null
+  # Hide warnings; Show relative path in reports; Use our standard
+  ./vendor/bin/phpcs --warning-severity=0 --basepath=. --standard=$PHP_CODE_SNIFFER_RULESET "$FILE"
+
+  if [[ "$?" != 0 ]]; then
+    echo -e "${WhiteOnRed}Failed:${NoColor} ${WhiteOnBlue}$FILE${NoColor}\n"
+    PASS=false
+  fi
+done
+
+if ! $PASS; then
+  echo -e "${WhiteOnRed}COMMIT FAILED because of PHP code sniffer fails.${NoColor}"
+  echo -e "To see per-file error, please run this command within the project root:"
+  echo -e "\t${WhiteOnBlue}./vendor/bin/phpcs --standard=../code-quality/phpcs.xml -v path/to/file${NoColor}\n"
+  exit 1
+fi
+echo -e "${BlackOnGreen}Done.${NoColor}\n"
+
+
+
+git add .
+echo -e "${BlackOnGreen}COMMIT SUCCEEDED${NoColor}\n"
 exit $?

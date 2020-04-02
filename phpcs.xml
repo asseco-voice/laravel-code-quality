@@ -17,7 +17,7 @@
     <!-- Report: "full", "xml", "checkstyle", "csv", "code", "info",
                 "json", "junit", "emacs", "source", "summary", "diff"
                 "svnblame", "gitblame", "hgblame" or "notifysend" -->
-    <arg name="report" value="full"/>
+    <arg name="report" value="code"/>
     <arg name="colors"/>
     <arg value="sp"/>
 
@@ -56,10 +56,15 @@
         <exclude name="Squiz.Arrays.ArrayDeclaration.SingleLineNotAllowed"/>
         <exclude name="Squiz.Commenting"/>
         <exclude name="Squiz.Files.FileExtension.ClassFound"/>
+        <exclude name="Squiz.Functions.GlobalFunction.Found"/>
         <exclude name="Squiz.NamingConventions.ValidFunctionName.ScopeNotCamelCaps"/>
         <exclude name="Squiz.Operators.ComparisonOperatorUsage.NotAllowed"/>
         <exclude name="Squiz.Operators.ComparisonOperatorUsage.ImplicitTrue"/>
+        <exclude name="Squiz.PHP.DisallowComparisonAssignment"/>
+        <exclude name="Squiz.PHP.DisallowInlineIf"/>
+        <exclude name="Squiz.PHP.ComparisonOperatorUsage.ImplicitTrue"/>
         <exclude name="Squiz.Strings.ConcatenationSpacing.PaddingFound"/>
+        <exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar"/>
         <exclude name="Squiz.WhiteSpace.FunctionSpacing"/>
         <exclude name="Squiz.WhiteSpace.FunctionClosingBraceSpace"/>
         <exclude name="Squiz.WhiteSpace.MemberVarSpacing"/>
