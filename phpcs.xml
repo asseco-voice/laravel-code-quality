@@ -22,18 +22,23 @@
     <arg value="sp"/>
 
     <rule ref="Generic">
-        <exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
+        <exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
         <exclude name="Generic.Commenting"/>
         <exclude name="Generic.Classes.OpeningBraceSameLine"/>
+        <exclude name="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+        <exclude name="Generic.Debug"/> <!-- CSS/JS/ES related -->
         <exclude name="Generic.Files.LowercasedFilename"/>
         <exclude name="Generic.Files.EndFileNoNewline"/>
-        <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSame"/>
+        <exclude name="Generic.Formatting.MultipleStatementAlignment"/>
         <exclude name="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
-        <exclude name="Generic.Functions.OpeningFunctionBraceBsdAllman.BraceOnSameLine"/>
+        <exclude name="Generic.Functions.OpeningFunctionBraceBsdAllman"/>
+        <exclude name="Generic.Metrics"/> <!-- PHPMD has it -->
         <exclude name="Generic.NamingConventions.CamelCapsFunctionName"/>
         <exclude name="Generic.PHP.ClosingPHPTag"/>
         <exclude name="Generic.PHP.RequireStrictTypes"/>
-        <exclude name="Generic.PHP.UpperCaseConstant.Found"/>
+        <exclude name="Generic.PHP.UpperCaseConstant"/>
+        <exclude name="Generic.Strings.UnnecessaryStringConcat"/>
+        <exclude name="Generic.VersionControl"/>
         <exclude name="Generic.WhiteSpace.DisallowSpaceIndent"/>
     </rule>
 

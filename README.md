@@ -106,10 +106,6 @@ with `git add` command.
 
 # Quality checks
 
-## PHP syntax errors
-
-Simple check with PHP inbuilt linter `php -l /path/to/file`.
-
 ## PHP code sniffer
 
 https://github.com/squizlabs/PHP_CodeSniffer/wiki/Customisable-Sniff-Properties

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep ".php\{0,1\}$")
-PASS=true
+STAGED_FILES_COMMA_SEPARATED=$(git diff --cached --name-only --diff-filter=ACM | grep ".php\{0,1\}$" | paste -sd "," -)
 
 CODE_QUALITY_PATH=./../code-quality
 VENDOR_PATH=${CODE_QUALITY_PATH}/vendor
@@ -49,35 +49,6 @@ if [[ "$STAGED_FILES" = "" ]]; then
   exit 0
 fi
 
-
-
-echo -e "================================="
-echo -e "Checking for PHP syntax errors..."
-echo -e "=================================\n"
-# Doesn't check for undefined variables/functions
-SYNTAX_FAILED=()
-for FILE in $STAGED_FILES
-do
-  php -lf $FILE > /dev/null
-  if [[ "$?" != 0 ]]; then
-    SYNTAX_FAILED+="\t$FILE\n"
-    PASS=false
-  fi
-done
-
-if ! $PASS; then
-  echo -e "${WhiteOnRed}COMMIT FAILED because of syntax errors in the following files:${NoColor}"
-  for FILE in $SYNTAX_FAILED
-  do
-    echo -e "$FILE"
-  done
-  echo -e "Exiting..."
-  exit 1
-fi
-echo -e "${BlackOnGreen}Done.${NoColor}\n"
-
-
-
 echo -e "========================="
 echo -e "PHP code sniffer check..."
 echo -e "=========================\n"
@@ -88,21 +59,13 @@ if [[ "$?" == 1 ]]; then
   exit 1
 fi
 
-for FILE in $STAGED_FILES
-do
-  # Fix what is fixable first (phpcbf) then run phpcs
-  $PHP_CODE_SNIFFER_BEAUTIFIER_PATH --standard=$PHP_CODE_SNIFFER_RULESET -q "$FILE" > /dev/null
-  # Hide warnings; Show relative path in reports; Use our standard
-  $PHP_CODE_SNIFFER_PATH --warning-severity=0 --basepath=. --standard=$PHP_CODE_SNIFFER_RULESET "$FILE"
+# Fix what is fixable first (phpcbf) then run phpcs
+$PHP_CODE_SNIFFER_BEAUTIFIER_PATH --standard=$PHP_CODE_SNIFFER_RULESET -q $STAGED_FILES > /dev/null
+# Hide warnings; Show relative path in reports; Use our standard
+$PHP_CODE_SNIFFER_PATH --warning-severity=0 --basepath=. --standard=$PHP_CODE_SNIFFER_RULESET $STAGED_FILES
 
-  if [[ "$?" != 0 ]]; then
-    echo -e "${WhiteOnRed}Failed:${NoColor} ${WhiteOnBlue}$FILE${NoColor}\n"
-    PASS=false
-  fi
-done
-
-if ! $PASS; then
-  echo -e "${WhiteOnRed}COMMIT FAILED because of PHP code sniffer fails.${NoColor}"
+if [[ "$?" != 0 ]]; then
+  echo -e "${WhiteOnRed}COMMIT FAILED because of PHP code sniffer, check output for possible fixes.${NoColor}\n"
   echo -e "To see per-file error, please run this command within the project root:"
   echo -e "\t${WhiteOnBlue}$PHP_CODE_SNIFFER_PATH --standard=$PHP_CODE_SNIFFER_RULESET -v path/to/file${NoColor}\n"
   exit 1
@@ -122,18 +85,10 @@ if [[ "$?" == 1 ]]; then
   exit 1
 fi
 
-for FILE in $STAGED_FILES
-do
-  ${PHP_MESS_DETECTOR_PATH} $FILE ansi $PHP_MESS_DETECTOR_RULESET
+$PHP_MESS_DETECTOR_PATH $STAGED_FILES_COMMA_SEPARATED ansi $PHP_MESS_DETECTOR_RULESET
 
-  if [[ "$?" != 0 ]]; then
-    echo -e "${WhiteOnRed}Failed:${NoColor} ${WhiteOnBlue}$FILE${NoColor}\n"
-    PASS=false
-  fi
-done
-
-if ! $PASS; then
-  echo -e "${WhiteOnRed}COMMIT FAILED because of PHP mess detector fails.${NoColor}"
+if [[ "$?" != 0 ]]; then
+  echo -e "${WhiteOnRed}COMMIT FAILED because of PHP mess detector, check output for possible fixes.${NoColor}"
   echo -e "To see per-file error, please run this command within the project root:"
   echo -e "\t${WhiteOnBlue}$PHP_MESS_DETECTOR_PATH path/to/file ansi $PHP_MESS_DETECTOR_RULESET${NoColor}\n"
   exit 1
