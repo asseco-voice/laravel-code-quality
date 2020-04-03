@@ -12,11 +12,15 @@
 
     <!-- Import the default rule sets -->
     <rule ref="rulesets/cleancode.xml">
-        <exclude name="StaticAccess" />
+<!--        <exclude name="StaticAccess" />-->
     </rule>
 
     <rule ref="rulesets/codesize.xml"/>
-    <rule ref="rulesets/controversial.xml"/>
+
+
+<!-- Ovo je uglavnom za camel case, možda da excludam na phpcs?
+ <rule ref="rulesets/controversial.xml"/>-->
+
     <rule ref="rulesets/design.xml"/>
     <rule ref="rulesets/unusedcode.xml"/>
 

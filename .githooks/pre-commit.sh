@@ -4,15 +4,16 @@ STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep ".php\{0,1
 PASS=true
 
 CODE_QUALITY_PATH=./../code-quality
+VENDOR_PATH=${CODE_QUALITY_PATH}/vendor
 
-PHP_CODE_SNIFFER_PATH=./vendor/bin/phpcs
-PHP_CODE_SNIFFER_BEAUTIFIER_PATH=./vendor/bin/phpcbf
+PHP_CODE_SNIFFER_PATH=${VENDOR_PATH}/bin/phpcs
+PHP_CODE_SNIFFER_BEAUTIFIER_PATH=${VENDOR_PATH}/bin/phpcbf
 PHP_CODE_SNIFFER_RULESET=${CODE_QUALITY_PATH}/phpcs.xml
 
-PHP_CS_FIXER_PATH=./vendor/bin/phpcs_fixer
+PHP_CS_FIXER_PATH=${VENDOR_PATH}/bin/phpcs_fixer
 PHP_CS_FIXER_RULESET=${CODE_QUALITY_PATH}/phpcsfixer.xml
 
-PHP_MESS_DETECTOR_PATH=./vendor/bin/phpmd
+PHP_MESS_DETECTOR_PATH=${VENDOR_PATH}/bin/phpmd
 PHP_MESS_DETECTOR_RULESET=${CODE_QUALITY_PATH}/phpmd.xml
 
 # Colors
