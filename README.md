@@ -11,11 +11,11 @@ Naming conventions in this document:
 - **SERVICE** is used to describe a repository, microservice, external 
 service and similar. Codebase which needs to use this repository to comply
 to given coding standards
-- CQS is this repository. Short for **C**ode **Q**uality **S**tandard
+- **CQS** is this repository. Short for **C**ode **Q**uality **S**tandard
 
 ## Installation
 
-CQS is NOT to be used as a standalone service.
+CQS is **NOT** to be used as a standalone service.
 
 If you'd like to automate this process to some extent, jump to 
 [Automating installation](#automating-installation) section
@@ -40,7 +40,7 @@ MUST do the following to support it:
     as a first parameter (`setup.sh /path/to/service`).
 
 3. `setup.sh` will install composer dependencies to get required binaries
-as well as copy Git hooks (`CQS/.githooks`) to `SERVICE/.git/hooks` 
+as well as copy Git hooks from `CQS/.githooks` to `SERVICE/.git/hooks` 
 directory. 
 
 4. At this point any action that is covered with Git hooks will be 
