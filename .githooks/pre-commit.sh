@@ -115,6 +115,7 @@ echo -e "=========================="
 echo -e "PHP mess detector check..."
 echo -e "==========================\n"
 # Check if phpcs is installed
+
 which $PHP_MESS_DETECTOR_PATH &> /dev/null
 if [[ "$?" == 1 ]]; then
   echo -e "${WhiteOnRed}PHPMD not installed, please install it to proceed.${NoColor}\n"
