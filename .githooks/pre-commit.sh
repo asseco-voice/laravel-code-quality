@@ -10,37 +10,13 @@ PHP_CODE_SNIFFER_PATH=${VENDOR_PATH}/bin/phpcs
 PHP_CODE_SNIFFER_BEAUTIFIER_PATH=${VENDOR_PATH}/bin/phpcbf
 PHP_CODE_SNIFFER_RULESET=${CODE_QUALITY_PATH}/phpcs.xml
 
-PHP_CS_FIXER_PATH=${VENDOR_PATH}/bin/phpcs_fixer
-PHP_CS_FIXER_RULESET=${CODE_QUALITY_PATH}/phpcsfixer.xml
-
 PHP_MESS_DETECTOR_PATH=${VENDOR_PATH}/bin/phpmd
 PHP_MESS_DETECTOR_RULESET=${CODE_QUALITY_PATH}/phpmd.xml
 
-# Colors
-Black="\033[0;30m"
-Red="\033[0;31m"
-Green="\033[0;32m"
-Yellow="\033[0;33m"
-Blue="\033[0;34m"
-Purple="\033[0;35m"
-Cyan="\033[0;36m"
-White="\033[0;37m"
-
-# Background
-OnBlack="\033[40m"
-OnRed="\033[41m"
-OnGreen="\033[42m"
-OnYellow="\033[43m"
-OnBlue="\033[44m"
-OnPurple="\033[45m"
-OnCyan="\033[46m"
-OnWhite="\033[47m"
-
-# Combinations
+# Color codes
 WhiteOnRed="\033[0;37m\033[41m"
 BlackOnGreen="\033[0;30m\033[42m"
 WhiteOnBlue="\033[0;37m\033[44m"
-
 NoColor='\033[0m'
 
 # No sense in scanning a complete codebase. Scanning only changed PHP files.

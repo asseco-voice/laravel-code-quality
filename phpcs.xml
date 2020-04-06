@@ -60,6 +60,8 @@
         <exclude name="Squiz.Arrays.ArrayDeclaration.MultiLineNotAllowed"/>
         <exclude name="Squiz.Arrays.ArrayDeclaration.SingleLineNotAllowed"/>
         <exclude name="Squiz.Commenting"/>
+        <exclude name="Squiz.CSS"/>
+        <exclude name="Squiz.Debug"/>
         <exclude name="Squiz.Files.FileExtension.ClassFound"/>
         <exclude name="Squiz.Functions.GlobalFunction.Found"/>
         <exclude name="Squiz.NamingConventions.ValidFunctionName.ScopeNotCamelCaps"/>
