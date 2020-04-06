@@ -13,6 +13,8 @@
     <exclude-pattern>database/</exclude-pattern>
     <exclude-pattern>storage/</exclude-pattern>
     <exclude-pattern>public/</exclude-pattern>
+    <exclude-pattern>*.js</exclude-pattern>
+    <exclude-pattern>*.css</exclude-pattern>
 
     <!-- Report: "full", "xml", "checkstyle", "csv", "code", "info",
                 "json", "junit", "emacs", "source", "summary", "diff"
@@ -61,7 +63,7 @@
         <exclude name="Squiz.Arrays.ArrayDeclaration.SingleLineNotAllowed"/>
         <exclude name="Squiz.Commenting"/>
         <exclude name="Squiz.CSS"/>
-        <exclude name="Squiz.Debug"/>
+        <exclude name="Squiz.Debug"/> <!-- CSS/JS/ES related -->
         <exclude name="Squiz.Files.FileExtension.ClassFound"/>
         <exclude name="Squiz.Functions.GlobalFunction.Found"/>
         <exclude name="Squiz.NamingConventions.ValidFunctionName.ScopeNotCamelCaps"/>

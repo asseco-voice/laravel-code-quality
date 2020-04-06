@@ -1,4 +1,5 @@
 /vendor
+/node_modules
 /.vscode
 \.php_cs\.cache
 .DS_Store

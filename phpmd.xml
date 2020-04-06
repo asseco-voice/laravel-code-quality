@@ -10,9 +10,7 @@
         Evil PHP mess detector rules
     </description>
 
-    <!-- Ovo je uglavnom za camel case, možda da excludam na phpcs? -->
     <rule ref="rulesets/controversial.xml"/>
-
     <rule ref="rulesets/cleancode.xml"/>
     <rule ref="rulesets/codesize.xml"/>
     <rule ref="rulesets/design.xml"/>
