@@ -114,7 +114,3 @@ https://github.com/squizlabs/PHP_CodeSniffer/wiki/Customisable-Sniff-Properties
 ## PHP Mess detector
 
 https://phpmd.org/rules/index.html
-
-## PHP CS fixer
-
-https://cs.symfony.com/
