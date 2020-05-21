@@ -2,9 +2,9 @@
 
 This repository is meant to be a single place for PHP related quality 
 standards when it comes to committing code from any PHP microservice
-to repository. Its main purpose is creating Git hooks which would
-catch any pre-commit action and see whether code is written according
-to agreed standards. If it fails, commit will not be made. 
+to repository. Its main purpose is creating [git hooks](https://githooks.com/) 
+which would catch any pre-commit action and see whether code is written 
+according to agreed standards. If it fails, commit will not be made. 
 
 Naming conventions in this document:
 
@@ -13,38 +13,69 @@ service and similar. Codebase which needs to use this repository to comply
 to given coding standards
 - **CQS** is this repository. Short for **C**ode **Q**uality **S**tandard
 
+CQS is a dependency, **NOT** a standalone service. Automated installation
+is implemented as a part of [chassis](http://git/asseco-hr-voice/evil/chassis)
+however you are free to install it as a separate dependency
+
 ## Installation
 
-CQS is **NOT** to be used as a standalone service.
+Given the fact that most of the codebase is behind Asseco VPN and 
+on GitLab repositories, simple ``composer require`` will not suffice
+here. 
 
-If you'd like to automate this process to some extent, jump to 
-[Automating installation](#automating-installation) section
+Inside SERVICE ``composer.json`` you will need to:
 
-SERVICE which needs to comply to a set of standards developed here 
-MUST do the following to support it:
+- List out code quality repository path
 
-1. clone the CQS repository at the same directory level as a SERVICE:
+```
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "http://git/asseco-hr-voice/evil/code-quality"
+    }
+],
+```
 
-    ```
-    |
-    |--- code-quality
-    |--- service1
-    |--- service2
-    ```
+- Include code quality as a required dependency:
 
-2. Call the CQS `setup.sh` script either from:
+```
+"require": {
+    "asseco-voice/code-quality": "dev-master"
+},
+```
 
-    2.1. SERVICE root (paths will be automatically mapped).
-    
-    2.2. CQS root including a path to SERVICE
-    as a first parameter (`setup.sh /path/to/service`).
+- Disable secure http (until our git server starts supporting
+https):
 
-3. `setup.sh` will install composer dependencies to get required binaries
+```
+"config": {
+    "secure-http": false
+},
+```
+
+You can now safely run ``composer install`` and code quality will install.
+
+After a successful installation you can 
+
+1. call ``setup.sh`` script with the one of three flags:
+
+    - **-t** install real time monitoring dependencies (NPM packages + gulp file)
+    - **-g** install githooks to a directory specified by -d flag, or to a default 
+    directory (see -d option)
+    - **-d** specify directory root path where githooks should be installed 
+    (defaults to directory from which the script is called).  I.e. provided 
+    root directory '/project' will install githooks to '/project/.git/hooks'
+    If -d option is specified, -g is automatically implied."
+
+2. `setup.sh` will install composer dependencies to get required binaries
 as well as copy Git hooks from `CQS/.githooks` to `SERVICE/.git/hooks` 
 directory. 
 
-4. At this point any action that is covered with Git hooks will be 
+3. At this point any action that is covered with Git hooks will be 
 in place for a given SERVICE. 
+
+If you'd like to automate this process to some extent, jump to 
+[Automating installation](#automating-installation) section
 
 ## Automating installation
 
@@ -95,6 +126,24 @@ post-install script:
 
 Once this is done, upon every `composer install` CQS repository will 
 be updated along with required Git hooks. 
+
+## IDE support
+
+To have PHP code sniffer & mess detector tools integrated within your 
+IDE and available in every project instead of setting it up for every
+project, it is recommended that you clone the CQS repository at the same 
+directory level as a SERVICE:
+
+```
+|
+|--- code-quality
+|--- service1
+|--- service2
+```
+After that point your IDE to ``phpcs.xml`` as a ruleset for PHP code
+sniffer, and ``phpmd.xml`` for mess detector ruleset.
+
+Link for [PHPStorm quality tools specifics](https://www.jetbrains.com/help/phpstorm/php-code-quality-tools.html).
 
 ## Usage & testing
 
