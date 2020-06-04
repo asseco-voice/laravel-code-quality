@@ -1,6 +1,6 @@
 <?php
 
-namespace Voice\LaravelExtender;
+namespace Voice\CodeQuality;
 
 use Illuminate\Support\ServiceProvider;
 
