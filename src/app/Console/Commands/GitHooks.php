@@ -2,6 +2,7 @@
 
 namespace Voice\CodeQuality\App\Console\Commands;
 
+use File;
 use Illuminate\Console\Command;
 
 class GitHooks extends Command
@@ -11,8 +12,7 @@ class GitHooks extends Command
      *
      * @var string
      */
-    protected $signature = 'asseco-voice:git-hooks
-                            {--d|dir=}';
+    protected $signature = 'asseco-voice:git-hooks';
 
     /**
      * The console command description.
@@ -38,7 +38,12 @@ class GitHooks extends Command
      */
     public function handle()
     {
-        exec(__DIR__ . '/../../../../setup.sh');
+        //exec(__DIR__ . '/../../../../setup.sh');
+        $hooksPath = __DIR__ . '/../../../.githooks';
+
+        File::copyDirectory($hooksPath, base_path('.git/hooks'));
+
+        //exec('cp -R ${BASEDIR}/.githooks/* ${CALLER_DIR}/.git/hooks');
 
         $this->info('Git hooks installed.');
     }

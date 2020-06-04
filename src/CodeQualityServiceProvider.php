@@ -3,6 +3,7 @@
 namespace Voice\CodeQuality;
 
 use Illuminate\Support\ServiceProvider;
+use Voice\CodeQuality\App\Console\Commands\GitHooks;
 
 class CodeQualityServiceProvider extends ServiceProvider
 {
@@ -11,7 +12,11 @@ class CodeQualityServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([__DIR__ . '/config/asseco-voice.php' => config_path('asseco-voice.php'),]);
+        $this->publishes([__DIR__ . '/config/asseco-voice.php' => config_path('asseco-voice.php')]);
+
+        $this->commands([
+            GitHooks::class
+        ]);
     }
 
     /**
