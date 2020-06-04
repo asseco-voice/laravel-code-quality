@@ -3,7 +3,7 @@
 STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep ".php\{0,1\}$")
 STAGED_FILES_COMMA_SEPARATED=$(git diff --cached --name-only --diff-filter=ACM | grep ".php\{0,1\}$" | paste -sd "," -)
 
-CODE_QUALITY_PATH=./../code-quality
+CODE_QUALITY_PATH=./../../code-quality
 VENDOR_PATH=${CODE_QUALITY_PATH}/vendor
 
 PHP_CODE_SNIFFER_PATH=${VENDOR_PATH}/bin/phpcs
