@@ -3,7 +3,8 @@
 namespace Voice\CodeQuality;
 
 use Illuminate\Support\ServiceProvider;
-use Voice\CodeQuality\App\Console\Commands\GitHooks;
+use Voice\CodeQuality\App\Console\Commands\GitHooksCommand;
+use Voice\LaravelExtender\App\Console\Commands\TddCommand;
 
 class CodeQualityServiceProvider extends ServiceProvider
 {
@@ -15,7 +16,8 @@ class CodeQualityServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/config/asseco-voice.php' => config_path('asseco-voice.php')]);
 
         $this->commands([
-            GitHooks::class
+            GitHooksCommand::class,
+            TddCommand::class
         ]);
     }
 

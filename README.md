@@ -163,3 +163,18 @@ https://github.com/squizlabs/PHP_CodeSniffer/wiki/Customisable-Sniff-Properties
 ## PHP Mess detector
 
 https://phpmd.org/rules/index.html
+
+
+
+### TDD command
+
+Helper script for TDD. Running the script will watch your app and test 
+directory which will upon change trigger running unit tests and show a 
+notification whether tests pass or fail.
+
+This eliminates the need to constantly switch between IDE and terminal.
+
+Script will take some time to execute for the first time to install 
+dependencies. Every subsequent run will be faster. 
+
+Don't run in Docker or you will not receive notifications. 

@@ -5,7 +5,7 @@ namespace Voice\CodeQuality\App\Console\Commands;
 use File;
 use Illuminate\Console\Command;
 
-class GitHooks extends Command
+class GitHooksCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -38,12 +38,9 @@ class GitHooks extends Command
      */
     public function handle()
     {
-        //exec(__DIR__ . '/../../../../setup.sh');
         $hooksPath = __DIR__ . '/../../../.githooks';
 
         File::copyDirectory($hooksPath, base_path('.git/hooks'));
-
-        //exec('cp -R ${BASEDIR}/.githooks/* ${CALLER_DIR}/.git/hooks');
 
         $this->info('Git hooks installed.');
     }
