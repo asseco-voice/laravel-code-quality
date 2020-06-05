@@ -4,7 +4,7 @@ namespace Voice\CodeQuality;
 
 use Illuminate\Support\ServiceProvider;
 use Voice\CodeQuality\App\Console\Commands\GitHooksCommand;
-use Voice\LaravelExtender\App\Console\Commands\TddCommand;
+use Voice\CodeQuality\App\Console\Commands\TddCommand;
 
 class CodeQualityServiceProvider extends ServiceProvider
 {

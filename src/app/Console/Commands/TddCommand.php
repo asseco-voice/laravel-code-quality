@@ -1,6 +1,6 @@
 <?php
 
-namespace Voice\LaravelExtender\App\Console\Commands;
+namespace Voice\CodeQuality\App\Console\Commands;
 
 use Illuminate\Console\Command;
 
