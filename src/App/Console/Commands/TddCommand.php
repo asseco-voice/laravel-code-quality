@@ -11,7 +11,7 @@ class TddCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'asseco-voice:tdd 
+    protected $signature = 'voice:tdd 
                             {--r|repo= : Repository path (defaults to pwd of calling directory)}
                             {--d|dir= : PhpUnit directory to test (defaults to /tests directory)}
                             {--f|files= : No space, comma separated PhpUnit files to test (defaults to /tests directory). Takes precedence before -d flag. Ex. -f=File1,File2,File3}';

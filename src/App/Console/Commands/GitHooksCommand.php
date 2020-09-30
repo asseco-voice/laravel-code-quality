@@ -12,7 +12,7 @@ class GitHooksCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'asseco-voice:git-hooks';
+    protected $signature = 'voice:git-hooks';
 
     /**
      * The console command description.
