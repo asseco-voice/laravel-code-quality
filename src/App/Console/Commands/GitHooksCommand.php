@@ -2,8 +2,8 @@
 
 namespace Voice\CodeQuality\App\Console\Commands;
 
-use File;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
 
 class GitHooksCommand extends Command
 {
@@ -36,11 +36,15 @@ class GitHooksCommand extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(): void
     {
         $hooksPath = __DIR__ . '/../../../.githooks';
 
-        File::copyDirectory($hooksPath, base_path('.git/hooks'));
+        $repoHooksPath = base_path('.git/hooks');
+
+        File::copyDirectory($hooksPath, $repoHooksPath);
+
+        exec('chmod -R 755 ' . $repoHooksPath);
 
         $this->info('Git hooks installed.');
     }
