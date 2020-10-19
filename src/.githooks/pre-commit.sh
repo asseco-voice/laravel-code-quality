@@ -3,15 +3,17 @@
 STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep ".php\{0,1\}$")
 STAGED_FILES_COMMA_SEPARATED=$(git diff --cached --name-only --diff-filter=ACM | grep ".php\{0,1\}$" | paste -sd "," -)
 
-CODE_QUALITY_PATH=./../../code-quality
-VENDOR_PATH=${CODE_QUALITY_PATH}/vendor
+VENDOR_PATH=${PWD}/vendor
+ASSECO_PATH=${VENDOR_PATH}/asseco-voice
+
+CODE_QUALITY_PATH=${ASSECO_PATH}/laravel-code-quality
 
 PHP_CODE_SNIFFER_PATH=${VENDOR_PATH}/bin/phpcs
 PHP_CODE_SNIFFER_BEAUTIFIER_PATH=${VENDOR_PATH}/bin/phpcbf
-PHP_CODE_SNIFFER_RULESET=${CODE_QUALITY_PATH}/phpcs.xml
+PHP_CODE_SNIFFER_RULESET=${CODE_QUALITY_PATH}/src/phpcs.xml
 
 PHP_MESS_DETECTOR_PATH=${VENDOR_PATH}/bin/phpmd
-PHP_MESS_DETECTOR_RULESET=${CODE_QUALITY_PATH}/phpmd.xml
+PHP_MESS_DETECTOR_RULESET=${CODE_QUALITY_PATH}/src/phpmd.xml
 
 # Color codes
 WhiteOnRed="\033[0;37m\033[41m"
