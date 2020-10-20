@@ -47,13 +47,13 @@ class TddCommand extends Command
         $dir = $options['dir'] ? "-d {$options['dir']}" : '';
         $files = $options['files'] ? "-f {$options['files']}" : '';
 
-        while (@ ob_end_flush()) ; // end all output buffers if any
+        while (@ob_end_flush()); // end all output buffers if any
 
         // this section streams output to terminal
         $proc = popen($basedir . "tdd-watcher.sh $repo $dir $files", 'r');
         while (!feof($proc)) {
             $this->info(fread($proc, 4096));
-            @ flush();
+            @flush();
         }
     }
 }

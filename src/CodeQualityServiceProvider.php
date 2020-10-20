@@ -25,7 +25,7 @@ class CodeQualityServiceProvider extends ServiceProvider
 
         $this->commands([
             GitHooksCommand::class,
-            TddCommand::class
+            TddCommand::class,
         ]);
     }
 }
