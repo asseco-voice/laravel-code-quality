@@ -24,16 +24,6 @@ class TddCommand extends Command
     protected $description = "Monitors test folders and auto triggers tests on file change. Don't run in Docker.";
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return void

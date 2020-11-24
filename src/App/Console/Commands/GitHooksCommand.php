@@ -22,16 +22,6 @@ class GitHooksCommand extends Command
     protected $description = 'Installing git pre-commit hooks locally.';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return mixed
