@@ -2,9 +2,9 @@
 
 namespace Asseco\CodeQuality;
 
-use Illuminate\Support\ServiceProvider;
 use Asseco\CodeQuality\App\Console\Commands\GitHooksCommand;
 use Asseco\CodeQuality\App\Console\Commands\TddCommand;
+use Illuminate\Support\ServiceProvider;
 
 class CodeQualityServiceProvider extends ServiceProvider
 {
