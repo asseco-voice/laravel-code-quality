@@ -1,6 +1,6 @@
 <?php
 
-namespace Voice\CodeQuality\App\Console\Commands;
+namespace Asseco\CodeQuality\App\Console\Commands;
 
 use Illuminate\Console\Command;
 
@@ -11,7 +11,7 @@ class TddCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'voice:tdd 
+    protected $signature = 'asseco:tdd 
                             {--r|repo= : Repository path (defaults to pwd of calling directory)}
                             {--d|dir= : PhpUnit directory to test (defaults to /tests directory)}
                             {--f|files= : No space, comma separated PhpUnit files to test (defaults to /tests directory). Takes precedence before -d flag. Ex. -f=File1,File2,File3}';

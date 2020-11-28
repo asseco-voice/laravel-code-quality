@@ -1,10 +1,10 @@
 <?php
 
-namespace Voice\CodeQuality;
+namespace Asseco\CodeQuality;
 
 use Illuminate\Support\ServiceProvider;
-use Voice\CodeQuality\App\Console\Commands\GitHooksCommand;
-use Voice\CodeQuality\App\Console\Commands\TddCommand;
+use Asseco\CodeQuality\App\Console\Commands\GitHooksCommand;
+use Asseco\CodeQuality\App\Console\Commands\TddCommand;
 
 class CodeQualityServiceProvider extends ServiceProvider
 {

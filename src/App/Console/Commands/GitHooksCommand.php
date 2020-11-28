@@ -1,6 +1,6 @@
 <?php
 
-namespace Voice\CodeQuality\App\Console\Commands;
+namespace Asseco\CodeQuality\App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -12,7 +12,7 @@ class GitHooksCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'voice:git-hooks';
+    protected $signature = 'asseco:git-hooks';
 
     /**
      * The console command description.

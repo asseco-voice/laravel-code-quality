@@ -12,13 +12,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Voice\\CodeQuality\\": "src/"
+            "Asseco\\CodeQuality\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Voice\\CodeQuality\\CodeQualityServiceProvider"
+                "Asseco\\CodeQuality\\CodeQualityServiceProvider"
             ]
         }
     }
