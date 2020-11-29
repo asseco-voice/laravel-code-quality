@@ -22,9 +22,9 @@ Service provider for Laravel will be installed automatically.
 
 After a successful installation you have 2 new Artisan commands available:
 
-- ``voice:git-hooks`` - will install git-hooks by copying 
+- ``asseco:git-hooks`` - will install git-hooks by copying 
 from `CQS/.githooks` to `SERVICE/.git/hooks` directory. 
-- ``voice:tdd`` - will install real time monitoring dependencies if not already 
+- ``asseco:tdd`` - will install real time monitoring dependencies if not already 
 present (NPM packages + gulp file), and depending on the flags you provided (explained
 within the command itself) will run real time monitoring for test folders as well as
 files under the ``App`` folder to enable automatic tests running with notification flag
