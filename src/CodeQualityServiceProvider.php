@@ -13,7 +13,7 @@ class CodeQualityServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/asseco-code-quality.php', 'asseco-code-quality');
+        //
     }
 
     /**
@@ -21,8 +21,6 @@ class CodeQualityServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([__DIR__ . '/../config/asseco-code-quality.php' => config_path('asseco-code-quality.php')]);
-
         $this->commands([
             GitHooksCommand::class,
             TddCommand::class,
